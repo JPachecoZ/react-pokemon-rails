@@ -28138,6 +28138,20 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   body{
     background-color: #F1F5F8;
     font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+  }
+
+  ul{
+    list-style-type: none;
+  }
+
+  li{
+    margin: 1rem;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 0.5rem;
+    text-align: center;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.03);
   }
 `;
   var global_default = global2;
