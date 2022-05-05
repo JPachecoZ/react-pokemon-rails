@@ -1557,7 +1557,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState6(initialState) {
+          function useState7(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1569,7 +1569,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect4(create, deps) {
+          function useEffect5(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -2349,7 +2349,7 @@
           exports.useContext = useContext5;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect4;
+          exports.useEffect = useEffect5;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect9;
@@ -2357,7 +2357,7 @@
           exports.useMemo = useMemo3;
           exports.useReducer = useReducer;
           exports.useRef = useRef5;
-          exports.useState = useState6;
+          exports.useState = useState7;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2853,9 +2853,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React8 = require_react();
+          var React9 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React8.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React9.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4256,7 +4256,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React8.Children.forEach(props.children, function(child) {
+                  React9.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -11828,7 +11828,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React8.Component().refs;
+          var emptyRefsObject = new React9.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -26604,7 +26604,7 @@
   customElements.define("turbo-cable-stream-source", TurboCableStreamSourceElement);
 
   // app/javascript/components/index.jsx
-  var import_react15 = __toESM(require_react());
+  var import_react17 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // node_modules/@emotion/react/dist/emotion-react.browser.esm.js
@@ -28230,7 +28230,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var reset_default = reset;
 
   // app/javascript/components/App/App.jsx
-  var import_react14 = __toESM(require_react());
+  var import_react16 = __toESM(require_react());
 
   // node_modules/react-router-dom/index.js
   var import_react6 = __toESM(require_react());
@@ -29502,16 +29502,115 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   }
 
   // app/javascript/components/pages/Map.jsx
+  var import_react14 = __toESM(require_react());
+  var import_react15 = __toESM(require_react());
+
+  // app/javascript/components/components/Modal.jsx
   var import_react12 = __toESM(require_react());
   var import_react13 = __toESM(require_react());
+  function Modal(props) {
+    const initialPokemonData = {
+      name: "",
+      stats: {
+        hp: 0,
+        attack: 0,
+        defense: 0,
+        special_attack: 0,
+        special_defense: 0,
+        speed: 0
+      },
+      type: 0,
+      picture_url: ""
+    };
+    const [pokemon, setPokemon] = (0, import_react13.useState)(initialPokemonData);
+    (0, import_react13.useEffect)(() => {
+      fetch(props.pokemon.pokemon.url).then((response) => response.json()).then((data) => {
+        const pokemonData = {
+          name: data.name,
+          stats: {
+            hp: data.stats[0].base_stat,
+            attack: data.stats[1].base_stat,
+            defense: data.stats[2].base_stat,
+            special_attack: data.stats[3].base_stat,
+            special_defense: data.stats[4].base_stat,
+            speed: data.stats[5].base_stat
+          },
+          type: data.types[0].type.name,
+          picture_url: data.sprites.other.dream_world.front_default
+        };
+        setPokemon(pokemonData);
+      });
+    }, []);
+    const Container2 = emotion_styled_browser_esm_default.div`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgb(23 23 23 / 75%);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    ${props.show.show ? "" : "display: none;"}
+  `;
+    const Card = emotion_styled_browser_esm_default.div`
+    width: 15rem;
+    height: 28rem;
+    background-color: white;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `;
+    const Title = emotion_styled_browser_esm_default.div`
+    font-size: large;
+    text-align: center;
+  `;
+    const Text = emotion_styled_browser_esm_default.p`
+    font-size: medium;
+    text-align: center;
+  `;
+    const Picture = emotion_styled_browser_esm_default.img`
+    height: 10rem;
+    width: 10rem;
+  `;
+    const Footer = emotion_styled_browser_esm_default.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `;
+    const Button = emotion_styled_browser_esm_default.button`
+    margin: 1rem;
+  `;
+    function handleLeaveClick(e) {
+      e.preventDefault();
+      props.show.handleShow(false);
+    }
+    function handleCaptureClick(e) {
+      e.preventDefault();
+      props.handlecart(pokemon);
+      props.show.handleShow(false);
+    }
+    return /* @__PURE__ */ import_react12.default.createElement(Container2, null, /* @__PURE__ */ import_react12.default.createElement(Card, null, /* @__PURE__ */ import_react12.default.createElement(Title, null, "Wild ", pokemon.name, " appeared!"), /* @__PURE__ */ import_react12.default.createElement(Picture, {
+      src: pokemon.picture_url
+    }), /* @__PURE__ */ import_react12.default.createElement(Text, null, " HP: ", pokemon.stats.hp, " "), /* @__PURE__ */ import_react12.default.createElement(Text, null, " Attack: ", pokemon.stats.attack, " "), /* @__PURE__ */ import_react12.default.createElement(Text, null, " Defense: ", pokemon.stats.defense, " "), /* @__PURE__ */ import_react12.default.createElement(Text, null, " Special Attack: ", pokemon.stats.special_attack, " "), /* @__PURE__ */ import_react12.default.createElement(Text, null, " Special Defense: ", pokemon.stats.special_defense, " "), /* @__PURE__ */ import_react12.default.createElement(Text, null, " Speed: ", pokemon.stats.speed, " "), /* @__PURE__ */ import_react12.default.createElement(Text, null, " Type: ", pokemon.type, " "), /* @__PURE__ */ import_react12.default.createElement(Footer, null, /* @__PURE__ */ import_react12.default.createElement(Button, {
+      onClick: (e) => handleCaptureClick(e)
+    }, "Capture"), /* @__PURE__ */ import_react12.default.createElement(Button, {
+      onClick: (e) => handleLeaveClick(e)
+    }, "Leave"))));
+  }
+
+  // app/javascript/components/pages/Map.jsx
   function getRandomOptionFromArray(Array2) {
     const rndInt = Math.floor(Math.random() * Array2.length);
     return Array2[rndInt];
   }
-  function Map2({ pokemons }) {
-    const [pokemonData, setPokemonData] = (0, import_react12.useState)({ pokemon: "", encounter: "" });
-    const [position2, setPosition] = (0, import_react12.useState)({ x: 100, y: 100 });
-    const canvasRef = (0, import_react12.useRef)(null);
+  function Map2({ pokemons, handlecart }) {
+    const [show, setShow] = (0, import_react14.useState)(false);
+    const [pokemonData, setPokemonData] = (0, import_react14.useState)({ pokemon: "", encounter: "" });
+    const [position2, setPosition] = (0, import_react14.useState)({ x: 100, y: 100 });
+    const canvasRef = (0, import_react14.useRef)(null);
+    const handleShow = (value) => setShow(value);
     class Player {
       constructor(position3) {
         this.position = position3;
@@ -29536,7 +29635,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         this.position.x += this.velocity.x;
       }
     }
-    (0, import_react12.useEffect)(() => {
+    (0, import_react14.useEffect)(() => {
       const canvas = canvasRef.current;
       canvas.width = 500;
       canvas.height = 500;
@@ -29549,72 +29648,79 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       }
       animate();
       const handleKeyDown = ({ keyCode }) => {
-        const chosenPokemon = getRandomOptionFromArray(pokemons);
-        console.log(chosenPokemon);
-        const encounterDetails = chosenPokemon.version_details.find((element) => element.version.name === "yellow").encounter_details.filter((element) => element.method.name === "super-rod" || element.method.name === "walk" || element.method.name === "surf" || element.method.name === "old-rod" || element.method.name === "good-rod");
-        const chosenEncounter = getRandomOptionFromArray(encounterDetails);
-        setPokemonData({ pokemon: chosenPokemon, encounter: chosenEncounter });
-        switch (keyCode) {
-          case 37:
-            player.velocity.x = -5;
-            player.velocity.y = 0;
-            if (Math.random() <= chosenEncounter.chance / 100) {
-              setPosition({ x: player.position.x, y: player.position.y });
-              window.removeEventListener("keydown", handleKeyDown);
-              window.removeEventListener("keyup", handleKeyUp);
-              player.velocity.x = 0;
-            }
-            ;
-            break;
-          case 40:
-            player.velocity.y = 5;
-            player.velocity.x = 0;
-            if (Math.random() <= chosenEncounter.chance / 100) {
-              setPosition({ x: player.position.x, y: player.position.y });
-              window.removeEventListener("keydown", handleKeyDown);
-              window.removeEventListener("keyup", handleKeyUp);
+        if (show === false) {
+          const chosenPokemon = getRandomOptionFromArray(pokemons);
+          const encounterDetails = chosenPokemon.version_details.find((element) => element.version.name === "yellow").encounter_details.filter((element) => element.method.name === "super-rod" || element.method.name === "walk" || element.method.name === "surf");
+          const chosenEncounter = getRandomOptionFromArray(encounterDetails);
+          setPokemonData({ pokemon: chosenPokemon, encounter: chosenEncounter });
+          switch (keyCode) {
+            case 37:
+              player.velocity.x = -5;
               player.velocity.y = 0;
-            }
-            ;
-            break;
-          case 39:
-            player.velocity.x = 5;
-            player.velocity.y = 0;
-            if (Math.random() <= chosenEncounter.chance / 100) {
-              setPosition({ x: player.position.x, y: player.position.y });
-              window.removeEventListener("keydown", handleKeyDown);
-              window.removeEventListener("keyup", handleKeyUp);
+              if (Math.random() <= chosenEncounter.chance / 100) {
+                setPosition({ x: player.position.x, y: player.position.y });
+                setShow(true);
+                window.removeEventListener("keydown", handleKeyDown);
+                window.removeEventListener("keyup", handleKeyUp);
+                player.velocity.x = 0;
+              }
+              ;
+              break;
+            case 40:
+              player.velocity.y = 5;
               player.velocity.x = 0;
-            }
-            ;
-            break;
-          case 38:
-            player.velocity.y = -5;
-            player.velocity.x = 0;
-            if (Math.random() <= chosenEncounter.chance / 100) {
-              setPosition({ x: player.position.x, y: player.position.y });
-              window.removeEventListener("keydown", handleKeyDown);
-              window.removeEventListener("keyup", handleKeyUp);
+              if (Math.random() <= chosenEncounter.chance / 100) {
+                setPosition({ x: player.position.x, y: player.position.y });
+                setShow(true);
+                window.removeEventListener("keydown", handleKeyDown);
+                window.removeEventListener("keyup", handleKeyUp);
+                player.velocity.y = 0;
+              }
+              ;
+              break;
+            case 39:
+              player.velocity.x = 5;
               player.velocity.y = 0;
-            }
-            ;
-            break;
+              if (Math.random() <= chosenEncounter.chance / 100) {
+                setPosition({ x: player.position.x, y: player.position.y });
+                setShow(true);
+                window.removeEventListener("keydown", handleKeyDown);
+                window.removeEventListener("keyup", handleKeyUp);
+                player.velocity.x = 0;
+              }
+              ;
+              break;
+            case 38:
+              player.velocity.y = -5;
+              player.velocity.x = 0;
+              if (Math.random() <= chosenEncounter.chance / 100) {
+                setPosition({ x: player.position.x, y: player.position.y });
+                setShow(true);
+                window.removeEventListener("keydown", handleKeyDown);
+                window.removeEventListener("keyup", handleKeyUp);
+                player.velocity.y = 0;
+              }
+              ;
+              break;
+          }
         }
       };
       const handleKeyUp = ({ keyCode }) => {
-        switch (keyCode) {
-          case 37:
-            player.velocity.x = 0;
-            break;
-          case 40:
-            player.velocity.y = 0;
-            break;
-          case 39:
-            player.velocity.x = 0;
-            break;
-          case 38:
-            player.velocity.y = 0;
-            break;
+        if (show === false) {
+          switch (keyCode) {
+            case 37:
+              player.velocity.x = 0;
+              break;
+            case 40:
+              player.velocity.y = 0;
+              break;
+            case 39:
+              player.velocity.x = 0;
+              break;
+            case 38:
+              player.velocity.y = 0;
+              break;
+          }
         }
       };
       window.addEventListener("keydown", handleKeyDown);
@@ -29623,8 +29729,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         window.removeEventListener("keydown", handleKeyDown);
         window.removeEventListener("keyup", handleKeyUp);
       };
-    }, []);
-    return /* @__PURE__ */ import_react12.default.createElement(import_react13.Fragment, null, /* @__PURE__ */ import_react12.default.createElement("canvas", {
+    }, [show]);
+    return /* @__PURE__ */ import_react14.default.createElement(import_react15.Fragment, null, show ? /* @__PURE__ */ import_react14.default.createElement(Modal, {
+      show: { show, handleShow },
+      pokemon: pokemonData.pokemon,
+      level: pokemonData.encounter,
+      handlecart
+    }) : "", /* @__PURE__ */ import_react14.default.createElement("canvas", {
       ref: canvasRef,
       pokemons
     }));
@@ -29632,16 +29743,16 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 
   // app/javascript/components/App/App.jsx
   function App() {
-    const [pokemons, setPokemons] = (0, import_react14.useState)([]);
+    const [pokemons, setPokemons] = (0, import_react16.useState)([]);
     const handlePokemons = (data) => setPokemons(data);
-    return /* @__PURE__ */ import_react14.default.createElement(BrowserRouter, null, /* @__PURE__ */ import_react14.default.createElement(Routes, null, /* @__PURE__ */ import_react14.default.createElement(Route, {
+    return /* @__PURE__ */ import_react16.default.createElement(BrowserRouter, null, /* @__PURE__ */ import_react16.default.createElement(Routes, null, /* @__PURE__ */ import_react16.default.createElement(Route, {
       path: "/",
-      element: /* @__PURE__ */ import_react14.default.createElement(HomePage, {
+      element: /* @__PURE__ */ import_react16.default.createElement(HomePage, {
         handlePokemons
       })
-    }), /* @__PURE__ */ import_react14.default.createElement(Route, {
+    }), /* @__PURE__ */ import_react16.default.createElement(Route, {
       path: "/map",
-      element: /* @__PURE__ */ import_react14.default.createElement(Map2, {
+      element: /* @__PURE__ */ import_react16.default.createElement(Map2, {
         pokemons
       })
     })));
@@ -29649,9 +29760,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 
   // app/javascript/components/index.jsx
   var root = import_client.default.createRoot(document.getElementById("root"));
-  root.render(/* @__PURE__ */ import_react15.default.createElement(import_react15.default.StrictMode, null, /* @__PURE__ */ import_react15.default.createElement(Global, {
+  root.render(/* @__PURE__ */ import_react17.default.createElement(import_react17.default.StrictMode, null, /* @__PURE__ */ import_react17.default.createElement(Global, {
     styles: [reset_default, global_default]
-  }), /* @__PURE__ */ import_react15.default.createElement(App, null)));
+  }), /* @__PURE__ */ import_react17.default.createElement(App, null)));
 })();
 /**
  * @license React
