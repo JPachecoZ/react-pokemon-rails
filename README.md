@@ -1,11 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version: 3.0.3
 
-Things you may want to cover:
+* Node version: 16.15.0
 
-* Ruby version
+* React version: 18.1.0
 
 * System dependencies
 
@@ -15,10 +14,12 @@ Things you may want to cover:
 
 * Database initialization
 
-* How to run the test suite
+* Deployment instructions:
 
-* Services (job queues, cache servers, search engines, etc.)
+  1. Run <bundle install>.
+  2. Run <npm install>.
+  3. If you want to change any component and watch the changes while doing them run <npm run watch> in a terminal.
+  4. Run <rails s> in another terminal.
+  5. Open your browser and write: "https://localhost:3000" as default.
 
-* Deployment instructions
 
-* ...
