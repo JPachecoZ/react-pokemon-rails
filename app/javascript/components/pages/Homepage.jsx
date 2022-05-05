@@ -1,7 +1,7 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import styled from "@emotion/styled";
-
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export default function HomePage({handlePokemons}){
 
   const[locations, setLocations] = useState([]);
   const[areas, setAreas] = useState([]);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://pokeapi.co/api/v2/region/kanto/")
@@ -34,7 +34,7 @@ export default function HomePage({handlePokemons}){
       .then(response => response.json())
       .then(data => {
         handlePokemons(data.pokemon_encounters.filter(pokemon => pokemon.version_details.find(element => element.version.name === "yellow") !== undefined));
-
+        navigate('/map');
       })
   };
 
