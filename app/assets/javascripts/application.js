@@ -26604,7 +26604,7 @@
   customElements.define("turbo-cable-stream-source", TurboCableStreamSourceElement);
 
   // app/javascript/components/index.jsx
-  var import_react4 = __toESM(require_react());
+  var import_react5 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // node_modules/@emotion/react/dist/emotion-react.browser.esm.js
@@ -28117,6 +28117,15 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var globalContext;
   var globalKey;
 
+  // app/javascript/components/styles/global.jsx
+  var global2 = css`
+  body{
+    background-color: #F1F5F8;
+    font-family: 'Roboto', sans-serif;
+  }
+`;
+  var global_default = global2;
+
   // app/javascript/components/styles/reset.jsx
   var reset = css`
   /* Box sizing rules */
@@ -28192,9 +28201,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
 
   // app/javascript/components/index.jsx
   var root = import_client.default.createRoot(document.getElementById("root"));
-  root.render(/* @__PURE__ */ import_react4.default.createElement(import_react4.default.StrictMode, null, /* @__PURE__ */ import_react4.default.createElement(Global, {
-    styles: reset_default
-  }), /* @__PURE__ */ import_react4.default.createElement("div", null, "Hello, World!")));
+  root.render(/* @__PURE__ */ import_react5.default.createElement(import_react5.default.StrictMode, null, /* @__PURE__ */ import_react5.default.createElement(Global, {
+    styles: [reset_default, global_default]
+  }), /* @__PURE__ */ import_react5.default.createElement("div", null, "Hello, World!")));
 })();
 /**
  * @license React
